@@ -3,7 +3,7 @@ import { env } from './src/env';
 
 export default defineConfig({
   out: './drizzle',
-  schema: './src/server/db/schema/auth.ts',
+  schema: './src/server/db/schema/index.ts',
   dialect: 'sqlite',
   driver: 'd1-http',
   dbCredentials: {
