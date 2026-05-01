@@ -1,0 +1,22 @@
+{
+  "projectName": "saku-toko",
+  "mode": "file-router",
+  "typescript": true,
+  "packageManager": "npm",
+  "includeExamples": false,
+  "tailwind": true,
+  "addOnOptions": {},
+  "envVarValues": {},
+  "git": true,
+  "install": true,
+  "routerOnly": false,
+  "version": 1,
+  "framework": "solid",
+  "chosenAddOns": [
+    "biome",
+    "cloudflare",
+    "tanstack-query",
+    "t3env",
+    "store"
+  ]
+}

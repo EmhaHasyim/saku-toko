@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "saku-toko",
+  "compatibility_date": "2026-04-29",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "main": "src/server.ts"
+}
