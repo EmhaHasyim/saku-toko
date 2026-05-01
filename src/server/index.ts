@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import indexRoute from "./indexRoute";
+import route from "./route";
 
-const app = new Hono().basePath("/api/v1").route("/", indexRoute);
+const app = new Hono().basePath("/api/v1").route("/", route);
 
 export default app;

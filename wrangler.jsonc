@@ -1,9 +1,17 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "saku-toko",
-  "compatibility_date": "2026-04-29",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
-  "main": "src/server.ts"
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "saku-toko",
+	"compatibility_date": "2026-04-29",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"main": "src/server.ts",
+	"d1_databases": [
+		{
+			"binding": "saku_toko_db",
+			"database_name": "saku_toko_db",
+			"database_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+			"migrations_dir": "drizzle"
+		}
+	]
 }
