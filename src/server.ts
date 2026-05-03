@@ -1,8 +1,9 @@
 import handler, { createServerEntry } from "@tanstack/solid-start/server-entry";
 import type { ExecutionContext } from "hono";
 import { Hono } from "hono";
-import type { AuthEnv } from "./server/auth";
+import type { AuthEnv } from "./server/modules/auth/service";
 import app from "./server/index";
+import { handleNotFound } from "./server/middleware/error";
 
 type CloudflareRequestContext = {
 	env: AuthEnv;
@@ -28,6 +29,8 @@ declare module "@tanstack/solid-router" {
 const server = new Hono<{ Bindings: AuthEnv }>();
 
 server.route("/", app);
+
+server.all("/api/*", handleNotFound);
 
 server.all("*", (c) =>
 	handler.fetch(c.req.raw, {
