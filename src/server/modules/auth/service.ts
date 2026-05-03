@@ -1,7 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { type Bindings, createDb } from "../db";
-import * as schema from "../db/schema";
+import { createDb, type Bindings } from "../../db";
 
 export type AuthEnv = Bindings & {
 	BETTER_AUTH_SECRET: string;
@@ -16,19 +15,19 @@ export function createAuth(env: AuthEnv) {
 	return betterAuth({
 		appName: "Saku Toko",
 
-		secret: env.BETTER_AUTH_SECRET,
+		basePath: "/api/v1/auth",
+
 		baseURL: env.BETTER_AUTH_URL,
+		secret: env.BETTER_AUTH_SECRET,
 
 		database: drizzleAdapter(db, {
 			provider: "sqlite",
-			schema,
 		}),
 
 		emailAndPassword: {
 			enabled: true,
 			minPasswordLength: 8,
 			maxPasswordLength: 128,
-			autoSignIn: true,
 		},
 
 		socialProviders: {

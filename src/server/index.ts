@@ -1,6 +1,13 @@
-import { Hono } from "hono";
-import routes from "./routes";
+import auth from "./modules/auth";
+import health from "./modules/health";
+import { createOpenApiApp, registerOpenApiDocs } from "./openapi";
 
-const app = new Hono().basePath("/api/v1").route("/", routes);
+const app = createOpenApiApp();
 
-export default app;
+const routes = app.route("/auth", auth).route("/health", health);
+
+registerOpenApiDocs(routes);
+
+export type AppType = typeof routes;
+
+export default routes;
