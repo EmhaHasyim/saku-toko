@@ -13,6 +13,10 @@ export default defineConfig(({ mode }) => {
 		resolve: {
 			tsconfigPaths: true,
 		},
+		test: {
+			environment: "node",
+			include: ["tests/**/*.test.ts"],
+		},
 
 		define: {
 			"process.env.NODE_ENV": JSON.stringify(
