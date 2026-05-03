@@ -1,12 +1,12 @@
 import handler, { createServerEntry } from "@tanstack/solid-start/server-entry";
 import type { ExecutionContext } from "hono";
 import { Hono } from "hono";
-import type { AuthEnv } from "./server/modules/auth/service";
-import app from "./server/index";
-import { handleNotFound } from "./server/middleware/error";
+import type { AppBindings, AppEnv } from "@src/env";
+import app from "@server/index";
+import { handleNotFound } from "@server/middleware/error";
 
 type CloudflareRequestContext = {
-	env: AuthEnv;
+	env: AppBindings;
 	ctx?: ExecutionContext | undefined;
 };
 
@@ -26,7 +26,7 @@ declare module "@tanstack/solid-router" {
 	}
 }
 
-const server = new Hono<{ Bindings: AuthEnv }>();
+const server = new Hono<AppEnv>();
 
 server.route("/", app);
 
@@ -45,16 +45,15 @@ server.all("*", (c) =>
 
 function fetch(
 	request: Request,
-	envOrOptions: AuthEnv | ServerEntryOptions = {} as AuthEnv,
+	envOrOptions: AppBindings | ServerEntryOptions = {} as AppBindings,
 	ctx?: ExecutionContext,
 ) {
 	const cloudflare =
 		"context" in envOrOptions ? envOrOptions.context?.cloudflare : undefined;
-	const env = cloudflare?.env ?? (envOrOptions as AuthEnv);
+
+	const env = cloudflare?.env ?? (envOrOptions as AppBindings);
 
 	return server.fetch(request, env, cloudflare?.ctx ?? ctx);
 }
 
-export default createServerEntry({
-	fetch,
-});
+export default createServerEntry({ fetch });

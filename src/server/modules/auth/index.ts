@@ -1,7 +1,8 @@
 import { Hono } from "hono";
-import { createAuth, type AuthEnv } from "./service";
+import type { AppEnv } from "@src/env";
+import { createAuth } from "./service";
 
-const auth = new Hono<{ Bindings: AuthEnv }>({ strict: false }).on(
+const auth = new Hono<AppEnv>({ strict: false }).on(
 	["GET", "POST"],
 	"/*",
 	async (c) => {

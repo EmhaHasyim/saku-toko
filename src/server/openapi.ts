@@ -1,11 +1,12 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { Scalar } from "@scalar/hono-api-reference";
+import type { AppEnv } from "@src/env";
 
 export function createOpenApiApp() {
-	return new OpenAPIHono().basePath("/api/v1");
+	return new OpenAPIHono<AppEnv>().basePath("/api/v1");
 }
 
-export function registerOpenApiDocs(app: OpenAPIHono) {
+export function registerOpenApiDocs(app: OpenAPIHono<AppEnv>) {
 	app.doc("/openapi.json", {
 		openapi: "3.0.0",
 		info: {
